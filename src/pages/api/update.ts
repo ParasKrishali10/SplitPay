@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import User from "@/model/User";
 import Cors from "cors"
 import initMiddleware from "@/app/lib/init-middleware";
+import bcrypt from "bcrypt"
 const cors=initMiddleware(
     Cors({
         origin:"*",
@@ -36,14 +37,14 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             return res.status(200).json({message:"Profile Updated successfully "})
         }catch(error)
         {
-            console.error("Error while updating user details")
+            console.error("Error while updating user details",error)
             return res.status(500).json({message:"Internal Server Error"})
         }
     }
     if(req.method=='POST')
     {
         try{
-            const bcrypt = require('bcrypt');
+
             const {email,newPassword,checkPassword,currentPassword}=req.body
             const check=await bcrypt.compare(currentPassword,checkPassword)
             if(!check)

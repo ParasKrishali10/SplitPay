@@ -4,6 +4,7 @@ import initMiddleware from "@/app/lib/init-middleware";
 import Group from "@/model/Group";
 import User from "@/model/User";
 import GroupShare from "@/model/GroupShare";
+import { Types } from "mongoose";
 
 const cors=initMiddleware(
     Cors({
@@ -11,6 +12,11 @@ const cors=initMiddleware(
         methods:["POST","GET"]
     })
 )
+interface IUser {
+    _id: Types.ObjectId;
+    name: string;
+    email: string;
+}
 export default async function handler(req:NextApiRequest,res:NextApiResponse)
 {
 
@@ -21,7 +27,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
 
             const {name,description,participants,email}=req.body
             console.log(participants)
-           const mappedParticipants=participants.map((p:any)=>({
+           const mappedParticipants=participants.map((p:IUser)=>({
             user:p._id
            }))
            console.log(mappedParticipants)

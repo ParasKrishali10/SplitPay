@@ -4,6 +4,7 @@ import Notification from "@/model/Notification";
 import Cors from "cors"
 import initMiddleware from "@/app/lib/init-middleware";
 import User from "@/model/User";
+import { Types } from "mongoose";
 
 const cors=initMiddleware(
     Cors({
@@ -11,6 +12,11 @@ const cors=initMiddleware(
         methods:["POST","GET"]
     })
 )
+interface IUser {
+    _id: Types.ObjectId;
+    name: string;
+    email: string;
+}
 export default async function handler(req:NextApiRequest,res:NextApiResponse)
 {
 
@@ -23,10 +29,10 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             const sending_person=await User.findOne({
                 email:sender_email
             })
-            const mappedParticipants=participants.map((p:any)=>({
+            const mappedParticipants=participants.map((p:IUser)=>({
                 user:p._id
                }))
-            const notification=await Notification.create({
+            await Notification.create({
                 sender:sending_person._id,
                 reciever:mappedParticipants,
                 message,
@@ -35,7 +41,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             return res.status(200).json({message:"Notification sent Successfully"})
         }catch(error)
         {
-            console.error("Error while sending notification")
+            console.error("Error while sending notification",error)
             return res.status(500).json({message:"Internal Server Error"})
         }
     }
@@ -71,7 +77,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             }
             console.log(id)
             console.log(check)
-            const notify=await Notification.findOneAndUpdate({
+            await Notification.findOneAndUpdate({
                 _id:id
             },{
                 seen:check

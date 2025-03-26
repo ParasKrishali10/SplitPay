@@ -16,10 +16,6 @@ interface Admin{
 interface IMember {
     user: Types.ObjectId;
   }
-
-  interface IGroup {
-    members: IMember[];
-  }
 export default function  Group_Details(){
     const router=useRouter()
     const searchParams=useSearchParams()
@@ -71,7 +67,7 @@ export default function  Group_Details(){
                 setDescription(data.description)
                 setBalance(data.balance)
                 setGroupParticipants(data.members)
-                const memberIds=data.members.map((member:any)=>member.user)
+                const memberIds=data.members.map((member:IMember)=>member.user)
                 const members=await Promise.all(
                     memberIds.map(async(userId:string)=>{
 

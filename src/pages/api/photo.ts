@@ -1,11 +1,7 @@
-
 import { NextApiRequest, NextApiResponse } from "next";
 import User from "@/model/User";
-import Account from "@/model/Account";
 import Cors from "cors"
-import initMiddleware from "@/app/lib/init-middleware";
-import { getSession } from "next-auth/react";
-
+import initMiddleware from "@/app/lib/init-middleware";;
 const cors=initMiddleware(
     Cors({
         origin:"*",
@@ -39,7 +35,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             })
         }catch(error)
         {
-            console.error("Error while updating user image")
+            console.error("Error while updating user image",error)
             return res.status(500).json({message:"Internal Server Error"})
         }
     }
