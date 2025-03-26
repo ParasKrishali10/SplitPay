@@ -1,16 +1,13 @@
 "use client"
-import { Tabs } from "../components/Tabs"
 import { Top } from "../components/Top"
 import { Sidebar } from "../components/Sidebar"
 import { useState,useEffect } from "react"
 import { useSession } from "next-auth/react"
-import { set } from "mongoose"
 export default function All_Groups(){
     const [image,setImage]=useState("")
     const [showVPA,setShowVPA]=useState(true)
     const [mobile,setMobile]=useState(false)
     const session=useSession()
-    const [loading,setLoading]=useState(true)
     const [details,setDetails]=useState(false);
     useEffect(()=>{
         const fetchImage=async ()=>{
@@ -23,9 +20,6 @@ export default function All_Groups(){
             }catch(error)
             {
                 throw new Error(`Failed to fetch user details for ID: ${error}`)
-            }
-            finally{
-                setLoading(false)
             }
         }
         fetchImage()

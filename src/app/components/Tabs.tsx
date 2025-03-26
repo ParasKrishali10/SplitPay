@@ -2,7 +2,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
-import { date } from "zod";
 interface Member{
     user:string
 }
@@ -20,7 +19,7 @@ interface GroupListItem{
     name:string,
     member:number,
     balance:number;
-    createdAt:String,
+    createdAt:string,
 }
 export const Tabs=()=>{
 const [activeTab,setActiveTab]=useState(1)
@@ -84,7 +83,7 @@ useEffect(()=>{
                     <button className={`p-3 ${activeTab==3?"bg-cyan-500":"bg-gray-700"}` } onClick={()=>{
                         setActiveTab(3)
                     }}>
-                        You're Owed
+                        You Owed
                     </button>
                 </div>
                 <div>

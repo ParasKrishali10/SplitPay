@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState,useEffect, use } from "react";
+import { useState,useEffect } from "react";
 interface User{
     id:number,
     name:string,
@@ -184,7 +184,7 @@ const createGroup = async () => {
                                 <div className="mt-1">
                                 <div className="w-full cursor-pointer overflow-y-auto h-48 p-2 bg-gray-800 rounded-md">
                                 {filteredUser.map((user)=>(
-                                    <div key={user.id} className="flex hover:bg-cyan-500  mt-3 p-1 rounded-md " onClick={(e)=>{
+                                    <div key={user.id} className="flex hover:bg-cyan-500  mt-3 p-1 rounded-md " onClick={()=>{
                                         const exist=participants.some(p=>p.email==user.email)
                                         if(!exist)
                                         {

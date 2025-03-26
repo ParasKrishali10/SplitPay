@@ -78,7 +78,7 @@ const BalanceCard = () => {
             <p className="text-2xl font-bold text-red-400">₹{balance.loss}</p>
           </div>
           <div>
-            <p className="text-xl text-gray-400">You're Owed</p>
+            <p className="text-xl text-gray-400">You Owed</p>
             <p className="text-2xl font-bold text-green-400">₹{balance.profit}</p>
           </div>
         </div>

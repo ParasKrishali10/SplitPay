@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react"
 import { Sidebar } from "../components/Sidebar"
 import { Top } from "../components/Top"
 import { Username } from "../components/Username"

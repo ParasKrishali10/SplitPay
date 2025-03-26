@@ -2,19 +2,24 @@
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { useEffect, useState } from "react";
-import { group } from "console";
-import { set } from "mongoose";
 import { RecentExpense } from "../components/RecentExpense";
 import { useSession } from "next-auth/react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Types } from "mongoose";
 interface Admin{
     id:string,
     name:string,
     email:string,
     image:string
 }
+interface IMember {
+    user: Types.ObjectId;
+  }
 
+  interface IGroup {
+    members: IMember[];
+  }
 export default function  Group_Details(){
     const router=useRouter()
     const searchParams=useSearchParams()
@@ -28,7 +33,6 @@ export default function  Group_Details(){
         image:''
     })
     const [memberDetails,setMembersDetails]=useState<Admin[]>([])
-    const [displayMembers,setDisplayMembers]=useState<Admin[]>([])
     const [name,setName]=useState("");
     const [description,setDescription]=useState("")
     const [balance,setBalance]=useState("")
@@ -40,7 +44,6 @@ export default function  Group_Details(){
     const[groupParticipants,setGroupParticipants]=useState("")
     const [update,setUpdate]=useState(false)
     const [share,displayShare]=useState(false)
-    const [adminId,setAdminId]=useState("")
     const [profit,setProfit]=useState(0)
     const [loss,setLoss]=useState(0)
     const toggle=()=>{
@@ -87,8 +90,6 @@ export default function  Group_Details(){
                 ))
                 setMembersDetails(members)
                 const admin_id=data.admin;
-                setAdminId(admin_id)
-
                 const userResponse=await fetch(`/api/get_user?id=${admin_id}`,{
                     method:"GET",
                     headers:{
@@ -228,6 +229,7 @@ export default function  Group_Details(){
             setCardDisplay(false)
         }catch(error)
         {
+            console.log(error)
             toast.error("Error in adding expense")
 
         }finally{

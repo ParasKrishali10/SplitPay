@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { Sidebar } from "../components/Sidebar"
 import { Top } from "../components/Top"
-import { signIn, useSession } from "next-auth/react"
+import {  useSession } from "next-auth/react"
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/navigation"
@@ -50,6 +50,7 @@ export default function Settings(){
         }
         const fetchImage=async ()=>{
             try{
+
                 const response=await fetch(`/api/get_user_image?email=${session.data?.user?.email}`,{
                     method:"GET"
                 })
@@ -95,6 +96,7 @@ export default function Settings(){
                 toast.warning("Your new password has less than of 8 character")
                 return;
             }
+            setUpdate(true)
             const response=await fetch('/api/update',{
                 method:"POST",
                 headers: {
@@ -113,10 +115,13 @@ export default function Settings(){
         {
             console.log("Error in updating detials",error)
             toast.warning("Error in updating details")
+        }finally{
+            setUpdate(false)
         }
 
     }
     const handleChanges=async()=>{
+
         const payload={
             name,
             email,
@@ -138,7 +143,8 @@ export default function Settings(){
                 toast.warning("Please dont leave mobile field empty")
                 return
             }
-            const response=await fetch('/api/update',{
+            setSave(true)
+            await fetch('/api/update',{
                 method:"PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -150,6 +156,9 @@ export default function Settings(){
         {
             console.log("Error in updating detials",error)
             toast.warning("Error in updating details")
+        }
+        finally{
+            setSave(false)
         }
     }
     return  <div>

@@ -1,6 +1,5 @@
 "use client"
 import { useSession } from "next-auth/react"
-import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 interface Notifications{
     _id:string,
@@ -32,7 +31,7 @@ const handleSeen=async(id:string, check: boolean)=>{
             id,
             check
         }
-        const response=await fetch('/api/send_notifications',{
+        await fetch('/api/send_notifications',{
             method:"PUT",
             headers:{
                 'Content-type':'application/json'
@@ -112,7 +111,7 @@ export default function Notification (){
                 setTotal(notificationsWithSenderName.length)
             }catch(error)
             {
-                console.error("Error while fetching notifications")
+                console.error("Error while fetching notifications",error)
             }
             finally{
                 setLoading(false)

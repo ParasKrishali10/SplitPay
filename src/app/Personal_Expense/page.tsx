@@ -26,7 +26,7 @@ interface ExpenseListProps{
 
 const deleteExpense=async(id:string)=>{
     try{
-        const response =await fetch("/api/add_personal",{
+        await fetch("/api/add_personal",{
             method:"PUT",
             headers:{
                 'Content-type':'application/json'
@@ -78,7 +78,7 @@ const ExpenseList=({ expense }: ExpenseListProps)=>{
                         </div>
                         </div>
                         <div className="text-lg">
-                                <button onClick={(e)=>{
+                                <button onClick={()=>{
                                     setShowNote(!showNote)
                                 }} className="text-purple-500 hover:text-purple-400 hover:bg-purple-900/20 rounded-md">{showNote?"Hide Note":"Show Note"}</button>
                         </div>
