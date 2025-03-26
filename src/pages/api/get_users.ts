@@ -1,10 +1,9 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 import User from "@/model/User";
-import Account from "@/model/Account";
 import Cors from "cors"
 import initMiddleware from "@/app/lib/init-middleware";
-import { getSession } from "next-auth/react";
+
 
 const cors=initMiddleware(
     Cors({
@@ -24,6 +23,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
         }
         catch(error)
         {
+            console.error('Database Error:', error);
             throw new Error("Error fetching user")
         }
     }

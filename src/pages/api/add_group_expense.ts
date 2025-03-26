@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Cors from "cors"
 import initMiddleware from "@/app/lib/init-middleware";
-import Group from "@/model/Group";
 import User from "@/model/User";
 import GroupExpense from "@/model/GroupExpense";
 

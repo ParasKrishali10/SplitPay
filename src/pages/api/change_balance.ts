@@ -2,16 +2,18 @@ import User from "@/model/User";
 import { NextApiRequest, NextApiResponse } from "next";
 import Cors from "cors"
 import initMiddleware from "@/app/lib/init-middleware";
-import Group from "@/model/Group";
 import Account from "@/model/Account";
 import GroupShare from "@/model/GroupShare";
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 const cors=initMiddleware(
     Cors({
         origin:"*",
         methods:["POST","GET","PUT"]
     })
 )
+interface IMember {
+    user: Types.ObjectId;
+  }
 export default async function handler(req:NextApiRequest,res:NextApiResponse)
 {
 
@@ -27,11 +29,11 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             })
             const admin_amount=amount-Math.floor((amount/(participants.length-1)))
             const user_amount=Math.floor((amount/participants.length))
-            const update_split_user=await Account.updateOne(
+            await Account.updateOne(
                 {userId:split_user._id},
                 {$inc:{profit:admin_amount}}
             )
-           const user= await GroupShare.updateOne(
+           await GroupShare.updateOne(
                 {
                     group:id,
                     'members.user': split_user._id
@@ -78,7 +80,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             group:id
         })
         const user_info=await groupShare.members.find(
-            (member:any)=>member.user.toString()===user_details.toString()
+            (member:IMember)=>member.user.toString()===user_details.toString()
         )
 
         if(!user_info)

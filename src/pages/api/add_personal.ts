@@ -21,7 +21,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             const user=await User.findOne({
                 email
             })
-            const PE=await Personal.create({
+            await Personal.create({
                 holder:user._id,
                 title,
                 amount,

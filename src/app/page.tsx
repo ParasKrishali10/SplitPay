@@ -1,7 +1,6 @@
 'use client'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Image from "next/image";
 import Link from "next/link";
 import { Card } from "./components/Card";
 import { signIn } from "next-auth/react";

@@ -1,5 +1,4 @@
 import initMiddleware from "@/app/lib/init-middleware";
-import Group from "@/model/Group";
 import GroupExpense from "@/model/GroupExpense";
 import User from "@/model/User";
 import Cors from "cors"
@@ -12,6 +11,7 @@ const cors=initMiddleware(
 )
 export default async function handler(req:NextApiRequest,res:NextApiResponse)
 {
+    await cors(req,res)
     if(req.method=="GET")
     {
         try{

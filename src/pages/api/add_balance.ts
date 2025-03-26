@@ -2,8 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Cors from "cors"
 import initMiddleware from "@/app/lib/init-middleware";
 import Group from "@/model/Group";
-import User from "@/model/User";
-import GroupExpense from "@/model/GroupExpense";
 
 const cors=initMiddleware(
     Cors({
@@ -20,7 +18,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
         try{
 
             const {id,amount}=req.body
-           const result= await Group.updateOne(
+            await Group.updateOne(
             {_id:id},
             {$inc:{balance:amount}}
            )

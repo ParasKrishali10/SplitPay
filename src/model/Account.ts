@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-import { Schema,model,models } from "mongoose";
-import User from "./User";
-import exp from "constants";
 const accountSchema=new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,

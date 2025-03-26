@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Schema } from "zod";
 const PersonalSchema=new mongoose.Schema({
      holder:{
             type:mongoose.Schema.Types.ObjectId,

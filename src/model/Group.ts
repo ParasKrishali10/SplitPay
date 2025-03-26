@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import { Schema } from "mongoose";
-import User from "./User";
 const groupSchema=new mongoose.Schema({
     name:{
         type:String,

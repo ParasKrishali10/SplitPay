@@ -1,14 +1,11 @@
-import { MongoClient } from "mongodb";
+
 import bcrypt from "bcrypt"
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import Email from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import connectToDatabase from "@/app/lib/mongodb";
 import User from "@/model/User";
 import Account from "@/model/Account";
-import { fallbackModeToStaticPathsResult } from "next/dist/lib/fallback";
-
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -59,7 +56,7 @@ export default NextAuth({
             return existing_user
         }catch(error)
         {
-          console.error("Error in authentication")
+          console.error("Error in authentication",error)
           return null;
         }
 
@@ -72,7 +69,7 @@ export default NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET || "",
   callbacks:{
-    async signIn({user,account,profile})
+    async signIn({user,profile})
     {
       try{
         console.log("Connecting to database")
@@ -101,16 +98,16 @@ export default NextAuth({
       console.log("User already present in db")
       }catch(error)
       {
-        console.log("Error while authentication")
+        console.log("Error while authentication",error)
         return false;
       }
       return true;
     },
-    async redirect({url,baseUrl})
+    async redirect()
     {
         return "/picture"
     },
-    async session({session,token,user})
+    async session({session})
     {
       return session
     }
