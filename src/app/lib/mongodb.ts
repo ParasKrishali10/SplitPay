@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable");
 }
-
+declare global {
+  var mongoose: { conn: mongoose.Mongoose | null; promise: Promise<mongoose.Mongoose> | null };
+}
 let cached = global.mongoose;
 
 if (!cached) {
@@ -18,10 +20,7 @@ async function connectToDatabase() {
   }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }).then((mongoose) => mongoose);
+    cached.promise = mongoose.connect(MONGODB_URI, {}).then((mongoose) => mongoose);
   }
 
   cached.conn = await cached.promise;
