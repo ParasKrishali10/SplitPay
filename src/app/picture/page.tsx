@@ -1,5 +1,4 @@
 "use client"
-
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -12,8 +11,6 @@ export default function Picture() {
         "https://api.dicebear.com/9.x/adventurer/svg?seed=Luis",
         "https://api.dicebear.com/9.x/adventurer/svg?seed=Jocelyn",
         "https://api.dicebear.com/9.x/adventurer/svg?seed=Maria"
-
-
     ];
     const session=useSession()
     const [startIndex, setStartIndex] = useState(0);
