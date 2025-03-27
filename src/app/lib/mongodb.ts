@@ -5,15 +5,19 @@ const MONGODB_URI = process.env.MONGODB_URI as string;
 if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable");
 }
+
+interface MongooseCache {
+  conn: mongoose.Mongoose | null;
+  promise: Promise<mongoose.Mongoose> | null;
+}
 declare global {
-  var mongoose: { conn: mongoose.Mongoose | null; promise: Promise<mongoose.Mongoose> | null };
+  namespace NodeJS {
+    interface Global {
+      mongoose: MongooseCache | undefined;
+    }
+  }
 }
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
+let cached: MongooseCache = (global as any).mongoose || { conn: null, promise: null };
 async function connectToDatabase() {
   if (cached.conn) {
     return cached.conn;
