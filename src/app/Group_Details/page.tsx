@@ -20,7 +20,6 @@ export default function  Group_Details(){
     const router=useRouter()
     const searchParams=useSearchParams()
     const id=searchParams?.get('id');
-    console.log(id)
     const session=useSession()
     const [admin,setAdmin]=useState<Admin>({
         id:'',
@@ -52,6 +51,7 @@ export default function  Group_Details(){
                 return ;
             }
             try{
+            setLoading(true)
                 const response=await fetch(`/api/get_group_details?id=${id}`,{
                     method:"GET",
                     headers:{
@@ -111,7 +111,8 @@ export default function  Group_Details(){
 
                 }catch(error)
             {
-                console.error(error)
+                console.error(error);
+    toast.error("Failed to load group details");
             }finally{
 
                 setLoading(false)
@@ -332,7 +333,7 @@ export default function  Group_Details(){
                          <div className="flex mt-2 justify-between">
                              <div className="flex">
                                      <div className="rounded-full w-12 h-12 text-center text-xl bg-white text-black">
-                                             <img src={admin.image} alt=""  className="w-12 h-12"/>
+                                             <img src={admin?.image} alt=""  className="w-12 h-12"/>
                                      </div>
                                      <div className="ml-3 mt-3 text-xl text-slate-400">
                                              {admin.name}
