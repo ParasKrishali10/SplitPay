@@ -19,7 +19,11 @@ interface IMember {
 export default function  Group_Details(){
     const router=useRouter()
     const searchParams=useSearchParams()
-    const id=searchParams?.get('id');
+    const id = searchParams?.get('id')
+    if(!id)
+    {
+        return <p>Loading....</p>
+    }
     const session=useSession()
     const [admin,setAdmin]=useState<Admin>({
         id:'',
