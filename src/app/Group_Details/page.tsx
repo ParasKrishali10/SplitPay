@@ -20,6 +20,7 @@ export default function  Group_Details(){
     const router=useRouter()
     const searchParams=useSearchParams()
     const id = searchParams?.get('id')
+
     const session=useSession()
     const [admin,setAdmin]=useState<Admin>({
         id:'',
@@ -44,6 +45,10 @@ export default function  Group_Details(){
     const toggle=()=>{
         setCardDisplay(!cardDisplay)
     }
+    if(!id)
+        {
+            return <p>Loading....</p>
+        }
     useEffect(()=>{
         const fetchGroup=async()=>{
             if(!id)
@@ -268,9 +273,6 @@ export default function  Group_Details(){
     }
     return <div className="bg-black min-h-screen">
         <ToastContainer></ToastContainer>
-        {!id && (
-            <p>Loading.....</p>
-        )}
         {loading && (
             <div className="flex h-screen text-white justify-center items-center">
                 <div>
