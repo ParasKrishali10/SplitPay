@@ -1,7 +1,7 @@
 "use client"
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { RecentExpense } from "../components/RecentExpense";
 import { useSession } from "next-auth/react";
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,7 +16,14 @@ interface Admin{
 interface IMember {
     user: Types.ObjectId;
   }
-export default function  Group_Details(){
+  export default function Group_Details() {
+    return (
+        <Suspense fallback={<p>Loading...</p>}>
+            <GroupDetailsContent />
+        </Suspense>
+    );
+}
+function  GroupDetailsContent(){
     const router=useRouter()
     const searchParams=useSearchParams()
     const id = searchParams?.get('id')
@@ -50,6 +57,10 @@ export default function  Group_Details(){
     //         return <p>Loading....</p>
     //     }
     useEffect(()=>{
+        if(!id)
+        {
+            return
+        }
         const fetchGroup=async()=>{
             if(!id)
             {
@@ -124,7 +135,7 @@ export default function  Group_Details(){
                 setLoading(false)
             }
         }
-        fetchGroup()
+            fetchGroup()
     },[id])
 
 
