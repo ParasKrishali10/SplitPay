@@ -45,10 +45,10 @@ export default function  Group_Details(){
     const toggle=()=>{
         setCardDisplay(!cardDisplay)
     }
-    if(!id)
-        {
-            return <p>Loading....</p>
-        }
+    // if(!id)
+    //     {
+    //         return <p>Loading....</p>
+    //     }
     useEffect(()=>{
         const fetchGroup=async()=>{
             if(!id)
