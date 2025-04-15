@@ -53,6 +53,7 @@ export default function  Group_Details(){
         const fetchGroup=async()=>{
             if(!id)
             {
+                setLoading(true)
                 return ;
             }
             try{
