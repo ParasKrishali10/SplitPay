@@ -5,7 +5,6 @@ import BalanceCard from "../components/BalanceCard"
 import { LinkCard } from "../components/LinkCard"
 import { Recent } from "../components/Recent"
 import { Group } from "../components/Group"
-import { Bills } from "../components/Bills"
 import { Personal } from "../components/Personal"
 export default function Dashboard(){
 
@@ -37,9 +36,9 @@ export default function Dashboard(){
 
                         <Group></Group>
                         </div>
-                        <div>
+                        {/* <div>
                             <Bills></Bills>
-                        </div>
+                        </div> */}
                         <div>
                             <Personal></Personal>
                         </div>

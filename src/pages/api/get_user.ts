@@ -18,8 +18,10 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
             const user=await User.findOne({
                 _id:id
             })
-
-
+            if(!user)
+            {
+                return res.status(404).json({ message: "User not found", success: false });
+            }
             return res.status(200).json(user)
         }
         catch(error)

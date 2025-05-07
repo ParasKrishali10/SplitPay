@@ -1,4 +1,3 @@
-
 import { NextApiRequest, NextApiResponse } from "next";
 import Notification from "@/model/Notification";
 import Cors from "cors"
@@ -71,7 +70,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse)
     {
         try{
             const {id,check}=req.body;
-            if(!id || !check)
+            if(!id)
             {
                 return  res.status(400).json("Req parameter had not been passed")
             }

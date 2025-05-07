@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import connectToDatabase from "@/app/lib/mongodb";
 import User from "@/model/User";
 import Account from "@/model/Account";
+let IsNewUser=false
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -13,8 +14,7 @@ export default NextAuth({
       credentials: {
         name: { label: "Name", type: "text", placeholder: "John Doe" },
         username: { label: "Email", type: "email", placeholder: "your-email@example.com" },
-        password: { label: "Password", type: "password" },
-        phone:{label:"Phone Number",type:"tel",placeholder:"+1234567890"}
+        password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
         try{
@@ -28,13 +28,13 @@ export default NextAuth({
             console.log("Checking done ")
             if(!existing_user)
             {
+              IsNewUser=true
               console.log("User not found inndb ")
               const hashedPassword=await bcrypt.hash(credentials?.password ||"",10)
               const newUser=await User.create({
                 name:credentials?.name,
                 email:credentials?.username,
                 password:hashedPassword,
-                mobile:credentials?.phone
               })
               console.log("User created successfully")
               console.log("Creating new account")
@@ -43,6 +43,7 @@ export default NextAuth({
               })
               console.log("Account created successfully for the user");
               return {name:credentials?.name,email:credentials?.username}
+
             }
             const isPasswordValid=await bcrypt.compare(
               credentials?.password || "",
@@ -80,6 +81,7 @@ export default NextAuth({
       })
       if(!existing_user)
       {
+        IsNewUser=true
         console.log("user not found so we are creating a new user")
           const newUser=await User.create({
             name:profile?.name||user.name,
@@ -92,6 +94,7 @@ export default NextAuth({
                 userId:newUser._id
               })
               console.log("Account created successfully for the user");
+
           return true;
       }
       console.log("User already present in db")
@@ -104,7 +107,12 @@ export default NextAuth({
     },
     async redirect()
     {
+      if(IsNewUser)
+      {
+        IsNewUser=false
         return "/picture"
+      }
+      return '/dashboard'
     },
     async session({session})
     {

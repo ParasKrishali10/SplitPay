@@ -13,6 +13,7 @@ interface Admin{
     email:string,
     image:string
 }
+
 interface IMember {
     user: Types.ObjectId;
   }
@@ -27,7 +28,6 @@ function  GroupDetailsContent(){
     const router=useRouter()
     const searchParams=useSearchParams()
     const id = searchParams?.get('id')
-
     const session=useSession()
     const [admin,setAdmin]=useState<Admin>({
         id:'',
@@ -49,13 +49,12 @@ function  GroupDetailsContent(){
     const [share,displayShare]=useState(false)
     const [profit,setProfit]=useState(0)
     const [loss,setLoss]=useState(0)
+
+    const [history,setHistory]=useState(false)
+
     const toggle=()=>{
         setCardDisplay(!cardDisplay)
     }
-    // if(!id)
-    //     {
-    //         return <p>Loading....</p>
-    //     }
     useEffect(()=>{
         if(!id)
         {
@@ -137,8 +136,6 @@ function  GroupDetailsContent(){
         }
             fetchGroup()
     },[id])
-
-
     const send_notification=async(msg:string,t:string)=>{
         const notification={
             sender_email:session.data?.user?.email,
@@ -185,6 +182,33 @@ function  GroupDetailsContent(){
             console.error(`Error occur : ${error}` )
         }
     }
+    const update_history=async(Eid:string)=>{
+        try{
+            console.log("Reaching")
+            const b=Math.floor(amount/memberDetails.length)
+            const payload={
+                user_email:session.data?.user?.email,
+                expense:Eid,
+                balance:b,
+                members:memberDetails,
+                id
+            }
+            console.log(payload)
+            await fetch('/api/ExpenseHistory',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(payload)
+            })
+            console.log("End")
+
+        }catch(error)
+        {
+            toast.error("Error while updating history")
+            console.log(error)
+        }
+    }
     const addExpense=async()=>{
         if(!expenseTitle.trim())
         {
@@ -217,10 +241,12 @@ function  GroupDetailsContent(){
                 },
                 body:JSON.stringify(payload)
             })
+            const data=await response.json()
             if(!response.ok)
             {
                 throw Error(`Req failed ${response.status}`)
             }
+
             console.log("New Expense Added")
             const add_balance=await fetch("/api/add_balance",{
                 method:"PUT",
@@ -239,7 +265,8 @@ function  GroupDetailsContent(){
             const t="Group Expense"
             change_balance(amount)
             send_notification(msg,t)
-            window.location.reload();
+            update_history(data._id.toString())
+            // window.location.reload();
             setCardDisplay(false)
         }catch(error)
         {
@@ -280,7 +307,6 @@ function  GroupDetailsContent(){
                 toast.error("Error in deleting participant")
             }finally{
                 setLoading(false)
-
             }
     }
     return <div className="bg-black min-h-screen">
@@ -302,7 +328,7 @@ function  GroupDetailsContent(){
             </div>
         )}
        {!loading&& (
-         <div className={`${cardDisplay===true?"opacity-25":"opacity-100"}`}>
+         <div className={`${cardDisplay===true ||history===true ?"opacity-25":"opacity-100"}`}>
 
          <div className="pt-8  flex text-cyan-500 ml-10 justify-between">
              <div className="flex mt-2 ml-16">
@@ -316,7 +342,7 @@ function  GroupDetailsContent(){
 </svg>
              </div>
              <div className=" ml-2 text-xl">
-                 <Link href={'/dashboard'}>Back To Dashboard</Link>
+                 <Link href={'/dashboard'}>Back To Dashboard </Link>
              </div>
              </div>
              <div className="mr-16 text-xl">
@@ -416,6 +442,13 @@ function  GroupDetailsContent(){
                              <div className="mt-6">
                                  <button className="rounded-md p-2 text-black w-full bg-cyan-500 " onClick={toggle}>Split new Expense</button>
                              </div>
+
+                             <div className="mt-6">
+                                 <button className="rounded-md p-2 text-black w-full bg-cyan-500 " onClick={()=>{
+                                     router.push(`/SettleUp?email=${session.data?.user?.email}&id=${id}`)
+                                     setHistory(true)
+                                 }}>Settle Up History</button>
+                             </div>
                          </div>
                  </div>
              </div>
@@ -485,5 +518,6 @@ function  GroupDetailsContent(){
         </div>
        </div>
        )}
+
     </div>
 }

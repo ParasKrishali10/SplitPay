@@ -1,20 +1,108 @@
+"use client"
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+interface Member{
+    user:string
+}
+interface Group{
+    _id:string,
+    name:string,
+    desciption:string,
+    admin:string,
+    members:Member[],
+    createdAt:Date,
+    balance:number
+}
+interface GroupListItem{
+    id:string,
+    name:string,
+    member:number,
+    balance:number;
+    createdAt:string,
+}
 export const Group=()=>{
+const [groups,setGroups]=useState<GroupListItem[]>([])
+const session=useSession()
+const router=useRouter()
+useEffect(()=>{
+    const fetchGroup=async ()=>{
+        try{
+            const response=await fetch(`/api/get_groups?email=${session.data?.user?.email}`,{
+                method:"GET",
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            })
+            if(!response.ok)
+            {
+                throw new Error('Failed to fetch group data')
 
+            }
+            const data:Group[]=await response.json()
+            const transformedGroups:GroupListItem[]=data.map(group=>({
+                id:group._id,
+                name:group.name,
+                member:group.members.length,
+                balance:group.balance,
+                createdAt:new Date(group.createdAt).toLocaleDateString()
+            }))
+            // if(transformedGroups.length>0)
+            // {
+            //     setNoGroup(false)
+            // }
+            setGroups(transformedGroups)
+            }catch(error)
+            {
+                console.error("Error fetching messages",error)
+            }
+            finally{
+
+            }
+    }
+    fetchGroup()
+},[session])
     return <div className="hidden lg:block">
-        <div className="cursor-pointer rounded-md bg-gray-900 mt-8 ml-5  lg:w-60 xl:w-96 h-auto">
+        <div className="cursor-pointer rounded-md bg-gray-900 mt-8 ml-5  lg:w-60 xl:w-96 h-auto" onClick={()=>{
+            router.push('All_Groups')
+
+        }}>
             <div className="p-7">
                 <div className="text-3xl">
                     Group Overview
                 </div>
-                <div className="flex justify-between mt-5">
-                <div className="text-xl">
+                <div className=" mt-5">
+                    {groups.length===0 &&(
+                        <div>
+                            <div className="flex justify-center  text-2xl">
+                                No Group Found
+                            </div>
+                        </div>
+                    )}
+                    {groups.map((g)=>(
+                        <div key={g.id} >
+                            <div className="mt-3 ">
+
+                                        <div className=" p-2 rounded-md text-xl text-slate-400">
+                                {g.name}
+                            </div>
+                            </div>
+                            {/* <div className="text-lg  text-slate-700">
+                            {g.balance}
+                            </div> */}
+                        </div>
+                    ))}
+                    {/* <div>
+                        {groups.map}
+                    </div> */}
+                {/* <div className="text-xl">
                     Roomates
                 </div>
                 <div className="text-lg  ">
                 ₹3000
+                </div> */}
                 </div>
-                </div>
-                <div className="flex justify-between mt-3">
+                {/* <div className="flex justify-between mt-3">
                 <div className="text-lg text-slate-600">
                     Your Share
                 </div>
@@ -29,16 +117,16 @@ export const Group=()=>{
                     ₹100
                     </div>
                 </div>
-                </div>
-                <div className="flex justify-between  mt-3">
+                </div> */}
+                {/* <div className="flex justify-between  mt-3">
                 <div className="text-xl">
                     Trip To Goa
                 </div>
                 <div className="  text-lg">
                 ₹10000
                 </div>
-                </div>
-                <div className="flex justify-between mt-3">
+                </div> */}
+                {/* <div className="flex justify-between mt-3">
                 <div className="text-lg text-slate-600">
                     Your Share
                 </div>
@@ -53,7 +141,7 @@ export const Group=()=>{
                     ₹3000
                     </div>
                 </div>
-                </div>
+                </div> */}
             </div>
         </div>
     </div>

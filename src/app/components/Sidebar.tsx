@@ -8,7 +8,7 @@ interface SidebarProps{
 export const Sidebar=({activePage}:SidebarProps)=>{
 const router=useRouter()
     return <div className="hidden md:block" >
-        <div className="min-h-screen bg-gray-900 p-5 mt-8 ml-6 lg:w-68   rounded-md">
+        <div className="h-screen bg-gray-900 p-5 mt-8 ml-6 lg:w-68   rounded-md">
             <div >
                 <div >
                     <button onClick={()=>{
@@ -94,21 +94,7 @@ const router=useRouter()
                     </button>
 
                 </div> */}
-                <div className="pt-5"  >
-                    <button className={`flex ${activePage==="analytics" ? "bg-sky-700" : ""} rounded-md w-48 h-10 hover:bg-sky-700`}>
-                    <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 mt-2 ml-2">
-  <path fill-rule="evenodd" d="M15.22 6.268a.75.75 0 0 1 .968-.431l5.942 2.28a.75.75 0 0 1 .431.97l-2.28 5.94a.75.75 0 1 1-1.4-.537l1.63-4.251-1.086.484a11.2 11.2 0 0 0-5.45 5.173.75.75 0 0 1-1.199.19L9 12.312l-6.22 6.22a.75.75 0 0 1-1.06-1.061l6.75-6.75a.75.75 0 0 1 1.06 0l3.606 3.606a12.695 12.695 0 0 1 5.68-4.974l1.086-.483-4.251-1.632a.75.75 0 0 1-.432-.97Z" clip-rule="evenodd" />
-</svg>
 
-
-                    </div>
-                    <div className="text-lg ml-4 mt-1">
-                        Analytics
-                    </div>
-                    </button>
-
-                </div>
                 <div className="pt-5"  >
                     <button className={`flex ${activePage==="settings" ? "bg-sky-700" : ""} rounded-md w-48 h-10 hover:bg-sky-700`} onClick={()=>{
                         router.push('/Settings')

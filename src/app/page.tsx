@@ -4,6 +4,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import Link from "next/link";
 import { Card } from "./components/Card";
 import { signIn } from "next-auth/react";
+const scrollToSection=(sectionId:string)=>{
+  const section=document.getElementById(sectionId)
+  if(section)
+  {
+    section.scrollIntoView({behavior:"smooth"})
+  }
+}
 export default function Home() {
   return (
     <div className="bg-black min-h-screen ">
@@ -16,13 +23,13 @@ export default function Home() {
             </div>
             <div className="flex text-lg cursor-pointer  space-x-8 text-white">
 
-              <div className="hover:text-indigo-400">
+              <button className="hover:text-indigo-400" onClick={()=>scrollToSection('Feature-Section')}>
                 Features
-              </div>
-              <div className="hover:text-indigo-400">
+              </button>
+              <div className="hover:text-indigo-400 mt-1" onClick={()=>scrollToSection('HIW-Section')}>
                 How It Works
               </div>
-              <div className="hover:text-indigo-400">
+              <div className="hover:text-indigo-400 mt-1" onClick={()=>scrollToSection('SignUp-Section')}>
                 SignUp
               </div>
             </div>
@@ -41,7 +48,7 @@ export default function Home() {
           </p>
           </div>
           <div className="flex justify-center  items-center py-4">
-            <button className="text-white  rounded-md bg-purple-500 w-48 py-3  hover:bg-purple-700">Get Started </button>
+            <button className="text-white  rounded-md bg-purple-500 w-48 py-3  hover:bg-purple-700" onClick={()=> signIn() }>Get Started </button>
           </div>
         </div>
         <div>
@@ -50,7 +57,7 @@ export default function Home() {
                   Key Features
               </div>
           </div>
-          <div className=" py-16 px-3  text-white rounded-lg w-auto px-4 py-8 grid  lg:grid-cols-4 gap-4 md: grid-cols-1">
+          <div id="Feature-Section" className=" py-16 px-3  text-white rounded-lg w-auto px-4 py-8 grid  lg:grid-cols-4 gap-4 md: grid-cols-1">
             <div className="bg-slate-900">
               <div className="mt-1 ml-2">
 
@@ -93,7 +100,7 @@ export default function Home() {
 
 
           </div>
-          <div className="">
+          <div id="HIW-Section" className="">
             <div className="bg-slate-900  ">
               <div className="text-center text-white py-12 font-bold text-4xl">
                   How It Works
@@ -139,28 +146,18 @@ export default function Home() {
                  <div className="text-3xl ">
                  Get Started Today
                   </div>
-                  <div className="py-2">
-                  <div className="py-3 text-base">
-
-                      <input type="text" placeholder="Full Name" className="bg-slate-800 w-80 p-1 rounded-md" />
+                  <div className="">
+                  <div className=" text-base">
                       </div>
-                      <div className="py-3 text-base">
-
-                      <input type="text" placeholder="Email Address" className="bg-slate-800 w-80 p-1 rounded-md" />
-                      </div>
-                      <div className="py-3 text-base">
-
-                      <input type="text" placeholder="Password" className="bg-slate-800 w-80 p-1 rounded-md" />
-                      </div>
-                      <div className="py-4">
-                        <button className="bg-purple-700 w-80 rounded-md p-2" onClick={()=> signIn() }>
+                      <div  id="SignUp-Section" className="">
+                        <button className="bg-purple-700 w-80 rounded-md p-2 mt-3" onClick={()=> signIn() }>
                           Sign Up
                         </button>
                       </div>
-                      <div className="">
+                      <div className="mt-3">
                         <div>
 
-                        Already have an account ? <Link href={"#"} className="underline">Log In</Link>
+                        Already have an account ? <Link href={"#"} className="underline" onClick={()=> signIn() }>Log In</Link>
                         </div>
 
 
