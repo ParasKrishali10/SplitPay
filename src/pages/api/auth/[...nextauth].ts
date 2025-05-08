@@ -107,12 +107,9 @@ export default NextAuth({
     },
     async redirect()
     {
-      if(IsNewUser)
-      {
-        IsNewUser=false
+
         return "/picture"
-      }
-      return '/dashboard'
+
     },
     async session({session})
     {
