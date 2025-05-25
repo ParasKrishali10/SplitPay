@@ -46,27 +46,49 @@ const BalanceCard = () => {
     <div>
       <div className="bg-gray-900 rounded-lg p-6 flex items-center justify-center">
         <div className="relative w-64 h-64">
-          <svg className="w-full h-full" viewBox="0 0 100 100">
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="#e11d48"
-              strokeWidth="10"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="#10b981"
-              strokeWidth="10"
-              strokeDasharray="283"
-              strokeDashoffset={10+(100 - (100 * balance.profit) / total)}
-              transform="rotate(-90 50 50)"
-            />
-          </svg>
+         <svg className="w-full h-full" viewBox="0 0 100 100">
+  {/* Base background circle */}
+  <circle
+    cx="50"
+    cy="50"
+    r="45"
+    fill="none"
+    stroke="#1f2937" // gray-900 background circle
+    strokeWidth="10"
+  />
+
+  {/* Loss circle (red) */}
+  <circle
+    cx="50"
+    cy="50"
+    r="45"
+    fill="none"
+    stroke="#e11d48"
+    strokeWidth="10"
+    strokeDasharray="283"
+    strokeDashoffset={
+      total === 0 ? 283 : 283 - (283 * balance.loss) / total
+    }
+    transform="rotate(-90 50 50)"
+  />
+
+  {/* Profit circle (green) */}
+  <circle
+    cx="50"
+    cy="50"
+    r="45"
+    fill="none"
+    stroke="#10b981"
+    strokeWidth="10"
+    strokeDasharray="283"
+
+    strokeDashoffset={
+      total === 0 ? 283 : 283 - (283 * balance.profit) / total
+    }
+    transform="rotate(-90 50 50)"
+  />
+</svg>
+
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <p className="text-4xl font-bold">₹{balance.balance}</p>
             <p className="text-sm text-gray-400">Total Balance</p>

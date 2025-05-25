@@ -22,7 +22,6 @@ interface GroupListItem{
     createdAt:string,
 }
 export const Tabs=()=>{
-const [activeTab,setActiveTab]=useState(1)
 const [groups,setGroups]=useState<GroupListItem[]>([])
 const [noGroup,setNoGroup]=useState(true)
 const [loading,setLoading]=useState(false)
@@ -68,28 +67,6 @@ useEffect(()=>{
 },[session])
     return <div>
         <div className="text-white  w-full ">
-            <div className="mt-10 ml-16 mr-16 bg-gray-900 rounded-md overflow-hidden">
-                <div className=" grid grid-cols-3 ">
-                    <button className={`p-3 ${activeTab==1?"bg-cyan-500":"bg-gray-700"} ` } onClick={()=>{
-                        setActiveTab(1);
-                    }}>
-                       All Groups
-                    </button>
-                    <button className={`p-3 ${activeTab==2?"bg-cyan-500":"bg-gray-700"}` } onClick={()=>{
-                        setActiveTab(2)
-                    }}>
-                        You Owe
-                    </button>
-                    <button className={`p-3 ${activeTab==3?"bg-cyan-500":"bg-gray-700"}` } onClick={()=>{
-                        setActiveTab(3)
-                    }}>
-                        You Owed
-                    </button>
-                </div>
-                <div>
-
-                </div>
-            </div>
                 <div className="w-full ">
 
                 <div className="mt-12 mr-16 ml-16  bg-gray-900 mt-10 ml-16 mr-16">

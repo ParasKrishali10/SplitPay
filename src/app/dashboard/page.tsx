@@ -3,7 +3,6 @@ import { Top } from "../components/Top"
 import { Username } from "../components/Username"
 import BalanceCard from "../components/BalanceCard"
 import { LinkCard } from "../components/LinkCard"
-import { Recent } from "../components/Recent"
 import { Group } from "../components/Group"
 import { Personal } from "../components/Personal"
 export default function Dashboard(){
@@ -27,19 +26,17 @@ export default function Dashboard(){
                        <div className="mt-8 w-full">
                         <LinkCard></LinkCard>
                        </div>
-                       <div className="mt-10 w-full">
+                       {/* <div className="mt-10 w-full">
                         <Recent></Recent>
-                       </div>
+                       </div> */}
                     </div>
                     <div>
                         <div>
 
                         <Group></Group>
                         </div>
-                        {/* <div>
-                            <Bills></Bills>
-                        </div> */}
-                        <div>
+
+                        <div className="mt-20">
                             <Personal></Personal>
                         </div>
                     </div>

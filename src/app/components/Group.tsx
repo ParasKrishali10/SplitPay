@@ -25,6 +25,7 @@ export const Group=()=>{
 const [groups,setGroups]=useState<GroupListItem[]>([])
 const session=useSession()
 const router=useRouter()
+
 useEffect(()=>{
     const fetchGroup=async ()=>{
         try{
@@ -47,10 +48,7 @@ useEffect(()=>{
                 balance:group.balance,
                 createdAt:new Date(group.createdAt).toLocaleDateString()
             }))
-            // if(transformedGroups.length>0)
-            // {
-            //     setNoGroup(false)
-            // }
+
             setGroups(transformedGroups)
             }catch(error)
             {
@@ -67,11 +65,11 @@ useEffect(()=>{
             router.push('All_Groups')
 
         }}>
-            <div className="p-7">
+            <div className="p-5">
                 <div className="text-3xl">
                     Group Overview
                 </div>
-                <div className=" mt-5">
+                <div className=" mt-4">
                     {groups.length===0 &&(
                         <div>
                             <div className="flex justify-center  text-2xl">
@@ -79,19 +77,16 @@ useEffect(()=>{
                             </div>
                         </div>
                     )}
-                    {groups.map((g)=>(
-                        <div key={g.id} >
-                            <div className="mt-3 ">
+                    {groups.slice(0, 6).map((g) => (
+  <div key={g.id}>
+    <div className="mt-2 ">
+      <div className="mt-2 rounded-md text-xl text-slate-400">
+        {g.name}
+      </div>
+    </div>
+  </div>
+))}
 
-                                        <div className=" p-2 rounded-md text-xl text-slate-400">
-                                {g.name}
-                            </div>
-                            </div>
-                            {/* <div className="text-lg  text-slate-700">
-                            {g.balance}
-                            </div> */}
-                        </div>
-                    ))}
                     {/* <div>
                         {groups.map}
                     </div> */}

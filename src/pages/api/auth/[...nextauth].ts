@@ -5,7 +5,6 @@ import GoogleProvider from "next-auth/providers/google";
 import connectToDatabase from "@/app/lib/mongodb";
 import User from "@/model/User";
 import Account from "@/model/Account";
-let IsNewUser=false
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -28,7 +27,6 @@ export default NextAuth({
             console.log("Checking done ")
             if(!existing_user)
             {
-              IsNewUser=true
               console.log("User not found inndb ")
               const hashedPassword=await bcrypt.hash(credentials?.password ||"",10)
               const newUser=await User.create({
@@ -81,7 +79,7 @@ export default NextAuth({
       })
       if(!existing_user)
       {
-        IsNewUser=true
+
         console.log("user not found so we are creating a new user")
           const newUser=await User.create({
             name:profile?.name||user.name,
