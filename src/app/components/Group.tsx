@@ -65,7 +65,7 @@ useEffect(()=>{
             router.push('All_Groups')
 
         }}>
-            <div className="p-5">
+            <div className=" p-5 h-64">
                 <div className="text-3xl">
                     Group Overview
                 </div>
@@ -77,7 +77,7 @@ useEffect(()=>{
                             </div>
                         </div>
                     )}
-                    {groups.slice(0, 6).map((g) => (
+                    {groups.slice(0, 4).map((g) => (
   <div key={g.id}>
     <div className="mt-2 ">
       <div className="mt-2 rounded-md text-xl text-slate-400">

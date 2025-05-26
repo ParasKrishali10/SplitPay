@@ -51,7 +51,7 @@ export const Personal=()=>{
     <div className="cursor-pointer rounded-md bg-gray-900 mt-10  ml-5 lg:w-60 xl:w-96 h-auto" onClick={()=>{
         router.push('/Personal_Expense')
     }}>
-       <div className="p-5 h-80">
+       <div className="p-5 h-64">
            <div className="text-3xl">
                Recent Activity
            </div>
@@ -62,16 +62,17 @@ export const Personal=()=>{
                             </div>
                         </div>
                     )}
-           {userExpense.map((u)=>(
-            <div key={u.id} className="mt-3 flex justify-between">
-                <div className="text-xl text-slate-600">
-                        {u.title}
-                </div>
-                <div className="text-lg text-slate-600">
-                ₹ {u.amount}
-                </div>
-            </div>
-           ))}
+           {userExpense.slice(0, 4).map((u) => (
+  <div key={u.id} className="mt-3 flex justify-between">
+    <div className="text-xl text-slate-300">
+      {u.title}
+    </div>
+    <div className="text-lg text-slate-600">
+      ₹ {u.amount}
+    </div>
+  </div>
+))}
+
        </div>
    </div>
 </div>

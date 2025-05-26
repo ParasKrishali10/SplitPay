@@ -36,7 +36,7 @@ export default function Dashboard(){
                         <Group></Group>
                         </div>
 
-                        <div className="mt-20">
+                        <div className="mt-44">
                             <Personal></Personal>
                         </div>
                     </div>
