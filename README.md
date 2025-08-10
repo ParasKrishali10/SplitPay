@@ -1,7 +1,22 @@
-<<<<<<< HEAD
-# SplitPay
-A group expense management system enabling users to track, split, and settle expenses transparently. Integrated OAuth for secure sign-in and MongoDB for dynamic balance tracking. Built with Next.js and Tailwind for responsive UI. Designed to simulate real-world Paytm-style group transactions with instant updates something like this now remeber
-=======
+# 💸 SplitPay – Group Expense Management System
+
+**SplitPay** is a modern group expense management application that makes it effortless to **track, split, and settle** shared expenses with friends, family, or colleagues. Inspired by real-world Paytm-style group transactions, it delivers **instant updates**, ensuring complete transparency and accuracy in expense management.
+
+✨ Features
+
+ - 🔐 **Secure Sign-In** – OAuth 2.0 integration for safe and seamless authentication.
+ - ⚡ **Real-Time Balance Tracking** – MongoDB-powered dynamic calculations keep balances up to date instantly.
+ - 📊 **Transparent Expense Splitting** – Record expenses, split evenly or by custom amounts, and see who owes what.
+ - 🔄 **Instant Updates** – Real-time simulation of Paytm-style group transactions.
+ - 📱 **Responsive UI** – Built with **Next.js** and **Tailwind CSS** for fast, mobile-friendly experiences.
+
+🛠 Tech Stack
+
+ - **Frontend:** Next.js, Tailwind CSS ,TS
+ - **Backend:** Node.js (Next.js API Routes)
+ - **Database:** MongoDB
+ - **Authentication:** OAuth 2.0 (NextAuth.js)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
