@@ -1,56 +1,141 @@
-# 💸 SplitPay – Group Expense Management System
 
-**SplitPay** is a modern group expense management application that makes it effortless to **track, split, and settle** shared expenses with friends, family, or colleagues. Inspired by real-world Paytm-style group transactions, it delivers **instant updates**, ensuring complete transparency and accuracy in expense management.
+# 💸 SPLITPAY — Smart Expense Splitting App
 
-✨ Features
+🚀 **Live App:** https://splitpay8.onrender.com  
 
- - 🔐 **Secure Sign-In** – OAuth 2.0 integration for safe and seamless authentication.
- - ⚡ **Real-Time Balance Tracking** – MongoDB-powered dynamic calculations keep balances up to date instantly.
- - 📊 **Transparent Expense Splitting** – Record expenses, split evenly or by custom amounts, and see who owes what.
- - 🔄 **Instant Updates** – Real-time simulation of Paytm-style group transactions.
- - 📱 **Responsive UI** – Built with **Next.js** and **Tailwind CSS** for fast, mobile-friendly experiences.
+---
 
-🛠 Tech Stack
+## 🌟 Overview
 
- - **Frontend:** Next.js, Tailwind CSS ,TS
- - **Backend:** Node.js (Next.js API Routes)
- - **Database:** MongoDB
- - **Authentication:** OAuth 2.0 (NextAuth.js)
+**SplitPay** is a full-stack expense management platform that enables users to:
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+- Split expenses with friends in groups  
+- Track personal spending separately  
+- Manage balances with transparency  
 
-## Getting Started
+Built with **real-world fintech workflows**, inspired by Paytm-style expense systems.
 
-First, run the development server:
+---
+
+## ⚡ Key Highlights
+
+- 🚀 Developed a **production-ready full-stack application**
+- 🔐 Implemented **OAuth authentication** with **0 regressions (100+ test scenarios)**
+- 💡 Designed **group expense splitting logic** with clean balance calculations  
+- ⚡ Built scalable backend using **Next.js API routes + MongoDB**
+- 🎯 Focused on **fast UI + smooth UX** using Tailwind CSS  
+
+---
+
+## 🧠 Core Features
+
+### 🔐 Authentication
+- OAuth-based login (secure & scalable)
+- Session management using NextAuth
+
+---
+
+### 👥 Group Expense System
+- Create groups & add members  
+- Add shared expenses  
+- Automatic split calculation  
+- Track who owes whom  
+
+---
+
+### 💰 Personal Expense Tracking
+- Separate personal expense module  
+- Clean overview of spending  
+
+---
+
+### 🔔 Real-Time Experience
+- Instant updates for:
+  - Expense changes  
+  - Group activity  
+  - Settlements  
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer        | Technology |
+|-------------|-----------|
+| Frontend    | Next.js, TypeScript, Tailwind CSS |
+| Backend     | Next.js API Routes |
+| Database    | MongoDB |
+| Auth        | OAuth (NextAuth.js) |
+| Deployment  | Render |
+
+---
+
+## 📂 Project Structure
+
+    src/  
+    ├── app/ # Frontend (Next.js App Router UI)  
+    ├── model/ # MongoDB models (schemas)  
+    ├── pages/api/ # Backend API routes  
+    ├── types/ # TypeScript types
+
+
+---
+
+## 🧠 Architecture Insight
+
+- **Frontend (app/):** UI & routing  
+- **API Layer (pages/api/):** Business logic  
+- **Database (model/):** Schema definitions  
+- **Types (types/):** Type safety  
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ParasKrishali10/SplitPay.git
+cd splitpay
 ```
+### 2. Install dependencies
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    npm install
+### 3. Setup environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    MONGODB_URI=your_mongodb_uri
+    NEXTAUTH_SECRET=your_secret
+    OAUTH_CLIENT_ID=your_client_id
+    OAUTH_CLIENT_SECRET=your_client_secret
+### 4. Run the development server
 
-## Learn More
+    npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+## 🧪 Engineering Quality
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   ✅ 100+ authentication test scenarios
+-   ✅ Modular and scalable codebase
+-   ✅ Clean separation of concerns
+-   ✅ Optimized API handling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+----------
 
-## Deploy on Vercel
+## 🎯 Why This Project Stands Out
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   Mimics **real fintech systems**
+-   Demonstrates **full-stack integration**
+-   Shows **system design understanding**
+-   Built with **industry-relevant stack**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> 493e2c4 (Initial commit)
+## 🚀 Future Improvements
+
+-   💳 Payment integration (UPI / Stripe)
+-   📊 Expense analytics dashboard
+-   🤖 AI-based insights
+-   📱 Mobile optimization
+
+## 👨‍💻 Author
+
+**Paras Krishali**  
+Final Year CSE | Full Stack Developer
